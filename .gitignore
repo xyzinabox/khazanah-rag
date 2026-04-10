@@ -1,0 +1,8 @@
+.env
+__pycache__/
+*.pyc
+data/chroma_db/
+data/chunks.json
+data/structured_data.json
+data/*.pdf
+.venv/
