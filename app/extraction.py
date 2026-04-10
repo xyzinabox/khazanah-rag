@@ -21,7 +21,7 @@ def extract_structured_data(force: bool = False) -> dict:
         documents.extend(parse_pdf(pdf_path))
     # Combine all text (truncate if needed to fit context window)
     full_text = "\n\n".join(d["text"] for d in documents)
-    full_text = full_text[:15000]
+    full_text = full_text[:6000]
 
     system = (
         "You are a data extraction specialist. Extract structured data from "
