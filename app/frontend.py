@@ -13,22 +13,21 @@ st.caption("Ask questions about Khazanah Nasional Berhad's Annual Review or expl
 
 # ── Sidebar ──────────────────────────────────────────────────────────────────
 with st.sidebar:
-    st.header("System Status",expanded=False)
-    try:
-        health = requests.get(f"{API_URL}/health", timeout=5).json()
-        if health["vector_store_ready"]:
-            st.success(f"✅ Ready — {health['chunks_count']} chunks indexed")
-        else:
-            st.warning("⚠️ Vector store not built yet. Run the ingestion pipeline first.")
-    except Exception:
-        st.error("❌ API not reachable. Make sure the backend is running.")
+    with st.expander("System Status"):
+        try:
+            health = requests.get(f"{API_URL}/health", timeout=5).json()
+            if health["vector_store_ready"]:
+                st.success(f"✅ Ready — {health['chunks_count']} chunks indexed")
+            else:
+                st.warning("⚠️ Vector store not built yet.")
+        except Exception:
+            st.error("❌ API not reachable.")
 
-    st.markdown("---")
-    st.markdown("**Sample questions:**")
-    st.markdown("- What was Khazanah's TWRR?")
-    st.markdown("- Which sectors did Khazanah increase exposure to?")
-    st.markdown("- Summarise sustainability initiatives.")
-    st.markdown("- What are the key financial highlights?")
+    with st.expander("Sample Questions"):
+        st.markdown("- What was Khazanah's TWRR?")
+        st.markdown("- Which sectors did Khazanah increase exposure to?")
+        st.markdown("- Summarise sustainability initiatives.")
+        st.markdown("- What are the key financial highlights?")
 
 # ── Tabs ─────────────────────────────────────────────────────────────────────
 tab_query, tab_data = st.tabs(["💬 Ask a Question", "📊 Structured Data"])
